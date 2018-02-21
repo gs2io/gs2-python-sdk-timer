@@ -56,21 +56,23 @@ class Gs2TimerClient(AbstractGs2Client):
         """
         body = { 
             "callbackMethod": request.get_callback_method(),
-            "executeTime": request.get_execute_time(),
             "callbackUrl": request.get_callback_url(),
+            "executeTime": request.get_execute_time(),
         }
 
-        if request.get_retry_max() is not None:
-            body["retryMax"] = request.get_retry_max()
         if request.get_callback_body() is not None:
             body["callbackBody"] = request.get_callback_body()
+        if request.get_retry_max() is not None:
+            body["retryMax"] = request.get_retry_max()
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.CreateTimerRequest import CreateTimerRequest
 
         from gs2_timer_client.control.CreateTimerResult import CreateTimerResult
         return CreateTimerResult(self._do_post_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "/timer",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer",
             service=self.ENDPOINT,
             module=CreateTimerRequest.Constant.MODULE,
             function=CreateTimerRequest.Constant.FUNCTION,
@@ -97,6 +99,8 @@ class Gs2TimerClient(AbstractGs2Client):
 
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.CreateTimerPoolRequest import CreateTimerPoolRequest
 
         from gs2_timer_client.control.CreateTimerPoolResult import CreateTimerPoolResult
@@ -125,10 +129,12 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DeleteTimerRequest import DeleteTimerRequest
 
         self._do_delete_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None else request.get_timer_id())) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else request.get_timer_id())) + "",
             service=self.ENDPOINT,
             module=DeleteTimerRequest.Constant.MODULE,
             function=DeleteTimerRequest.Constant.FUNCTION,
@@ -152,10 +158,12 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DeleteTimerPoolRequest import DeleteTimerPoolRequest
 
         self._do_delete_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
             service=self.ENDPOINT,
             module=DeleteTimerPoolRequest.Constant.MODULE,
             function=DeleteTimerPoolRequest.Constant.FUNCTION,
@@ -184,11 +192,13 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DescribeTimerRequest import DescribeTimerRequest
 
         from gs2_timer_client.control.DescribeTimerResult import DescribeTimerResult
         return DescribeTimerResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "/timer",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer",
             service=self.ENDPOINT,
             module=DescribeTimerRequest.Constant.MODULE,
             function=DescribeTimerRequest.Constant.FUNCTION,
@@ -217,6 +227,8 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DescribeTimerPoolRequest import DescribeTimerPoolRequest
 
         from gs2_timer_client.control.DescribeTimerPoolResult import DescribeTimerPoolResult
@@ -246,11 +258,13 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.GetTimerRequest import GetTimerRequest
 
         from gs2_timer_client.control.GetTimerResult import GetTimerResult
         return GetTimerResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None else request.get_timer_id())) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else request.get_timer_id())) + "",
             service=self.ENDPOINT,
             module=GetTimerRequest.Constant.MODULE,
             function=GetTimerRequest.Constant.FUNCTION,
@@ -275,11 +289,13 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.GetTimerPoolRequest import GetTimerPoolRequest
 
         from gs2_timer_client.control.GetTimerPoolResult import GetTimerPoolResult
         return GetTimerPoolResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
             service=self.ENDPOINT,
             module=GetTimerPoolRequest.Constant.MODULE,
             function=GetTimerPoolRequest.Constant.FUNCTION,
@@ -304,11 +320,13 @@ class Gs2TimerClient(AbstractGs2Client):
 
         headers = { 
         }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.UpdateTimerPoolRequest import UpdateTimerPoolRequest
 
         from gs2_timer_client.control.UpdateTimerPoolResult import UpdateTimerPoolResult
         return UpdateTimerPoolResult(self._do_put_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None else request.get_timer_pool_name())) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
             service=self.ENDPOINT,
             module=UpdateTimerPoolRequest.Constant.MODULE,
             function=UpdateTimerPoolRequest.Constant.FUNCTION,

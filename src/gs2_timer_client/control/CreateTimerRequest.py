@@ -33,17 +33,17 @@ class CreateTimerRequest(Gs2BasicRequest):
         if params is None:
             self.__timer_pool_name = None
             self.__callback_method = None
+            self.__callback_url = None
+            self.__callback_body = None
             self.__execute_time = None
             self.__retry_max = None
-            self.__callback_body = None
-            self.__callback_url = None
         else:
             self.set_timer_pool_name(params['timerPoolName'] if 'timerPoolName' in params.keys() else None)
             self.set_callback_method(params['callbackMethod'] if 'callbackMethod' in params.keys() else None)
+            self.set_callback_url(params['callbackUrl'] if 'callbackUrl' in params.keys() else None)
+            self.set_callback_body(params['callbackBody'] if 'callbackBody' in params.keys() else None)
             self.set_execute_time(params['executeTime'] if 'executeTime' in params.keys() else None)
             self.set_retry_max(params['retryMax'] if 'retryMax' in params.keys() else None)
-            self.set_callback_body(params['callbackBody'] if 'callbackBody' in params.keys() else None)
-            self.set_callback_url(params['callbackUrl'] if 'callbackUrl' in params.keys() else None)
 
     def get_timer_pool_name(self):
         """
@@ -99,6 +99,60 @@ class CreateTimerRequest(Gs2BasicRequest):
         self.set_callback_method(callback_method)
         return self
 
+    def get_callback_url(self):
+        """
+        コールバック先のURLを取得
+        :return: コールバック先のURL
+        :rtype: unicode
+        """
+        return self.__callback_url
+
+    def set_callback_url(self, callback_url):
+        """
+        コールバック先のURLを設定
+        :param callback_url: コールバック先のURL
+        :type callback_url: unicode
+        """
+        self.__callback_url = callback_url
+
+    def with_callback_url(self, callback_url):
+        """
+        コールバック先のURLを設定
+        :param callback_url: コールバック先のURL
+        :type callback_url: unicode
+        :return: this
+        :rtype: CreateTimerRequest
+        """
+        self.set_callback_url(callback_url)
+        return self
+
+    def get_callback_body(self):
+        """
+        method に PUT/POST を指定したときに利用するリクエストボディを取得
+        :return: method に PUT/POST を指定したときに利用するリクエストボディ
+        :rtype: unicode
+        """
+        return self.__callback_body
+
+    def set_callback_body(self, callback_body):
+        """
+        method に PUT/POST を指定したときに利用するリクエストボディを設定
+        :param callback_body: method に PUT/POST を指定したときに利用するリクエストボディ
+        :type callback_body: unicode
+        """
+        self.__callback_body = callback_body
+
+    def with_callback_body(self, callback_body):
+        """
+        method に PUT/POST を指定したときに利用するリクエストボディを設定
+        :param callback_body: method に PUT/POST を指定したときに利用するリクエストボディ
+        :type callback_body: unicode
+        :return: this
+        :rtype: CreateTimerRequest
+        """
+        self.set_callback_body(callback_body)
+        return self
+
     def get_execute_time(self):
         """
         コールバックを実行するタイムスタンプを取得
@@ -151,58 +205,4 @@ class CreateTimerRequest(Gs2BasicRequest):
         :rtype: CreateTimerRequest
         """
         self.set_retry_max(retry_max)
-        return self
-
-    def get_callback_body(self):
-        """
-        method に PUT/POST を指定したときに利用するリクエストボディを取得
-        :return: method に PUT/POST を指定したときに利用するリクエストボディ
-        :rtype: unicode
-        """
-        return self.__callback_body
-
-    def set_callback_body(self, callback_body):
-        """
-        method に PUT/POST を指定したときに利用するリクエストボディを設定
-        :param callback_body: method に PUT/POST を指定したときに利用するリクエストボディ
-        :type callback_body: unicode
-        """
-        self.__callback_body = callback_body
-
-    def with_callback_body(self, callback_body):
-        """
-        method に PUT/POST を指定したときに利用するリクエストボディを設定
-        :param callback_body: method に PUT/POST を指定したときに利用するリクエストボディ
-        :type callback_body: unicode
-        :return: this
-        :rtype: CreateTimerRequest
-        """
-        self.set_callback_body(callback_body)
-        return self
-
-    def get_callback_url(self):
-        """
-        コールバック先のURLを取得
-        :return: コールバック先のURL
-        :rtype: unicode
-        """
-        return self.__callback_url
-
-    def set_callback_url(self, callback_url):
-        """
-        コールバック先のURLを設定
-        :param callback_url: コールバック先のURL
-        :type callback_url: unicode
-        """
-        self.__callback_url = callback_url
-
-    def with_callback_url(self, callback_url):
-        """
-        コールバック先のURLを設定
-        :param callback_url: コールバック先のURL
-        :type callback_url: unicode
-        :return: this
-        :rtype: CreateTimerRequest
-        """
-        self.set_callback_url(callback_url)
         return self
