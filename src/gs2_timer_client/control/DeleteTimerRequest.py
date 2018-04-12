@@ -53,7 +53,7 @@ class DeleteTimerRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
-        if not isinstance(timer_pool_name, unicode):
+        if timer_pool_name and not isinstance(timer_pool_name, unicode):
             raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
@@ -82,7 +82,7 @@ class DeleteTimerRequest(Gs2BasicRequest):
         :param timer_id: タイマーIDを指定します。
         :type timer_id: unicode
         """
-        if not isinstance(timer_id, unicode):
+        if timer_id and not isinstance(timer_id, unicode):
             raise TypeError(type(timer_id))
         self.__timer_id = timer_id
 
