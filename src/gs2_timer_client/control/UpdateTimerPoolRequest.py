@@ -32,9 +32,11 @@ class UpdateTimerPoolRequest(Gs2BasicRequest):
         super(UpdateTimerPoolRequest, self).__init__(params)
         if params is None:
             self.__timer_pool_name = None
-            self.__description = None
         else:
             self.set_timer_pool_name(params['timerPoolName'] if 'timerPoolName' in params.keys() else None)
+        if params is None:
+            self.__description = None
+        else:
             self.set_description(params['description'] if 'description' in params.keys() else None)
 
     def get_timer_pool_name(self):
@@ -51,6 +53,8 @@ class UpdateTimerPoolRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
+        if not isinstance(timer_pool_name, unicode):
+            raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
     def with_timer_pool_name(self, timer_pool_name):
@@ -66,24 +70,26 @@ class UpdateTimerPoolRequest(Gs2BasicRequest):
 
     def get_description(self):
         """
-        タイマープールの説明を取得
-        :return: タイマープールの説明
+        説明文を取得
+        :return: 説明文
         :rtype: unicode
         """
         return self.__description
 
     def set_description(self, description):
         """
-        タイマープールの説明を設定
-        :param description: タイマープールの説明
+        説明文を設定
+        :param description: 説明文
         :type description: unicode
         """
+        if not isinstance(description, unicode):
+            raise TypeError(type(description))
         self.__description = description
 
     def with_description(self, description):
         """
-        タイマープールの説明を設定
-        :param description: タイマープールの説明
+        説明文を設定
+        :param description: 説明文
         :type description: unicode
         :return: this
         :rtype: UpdateTimerPoolRequest

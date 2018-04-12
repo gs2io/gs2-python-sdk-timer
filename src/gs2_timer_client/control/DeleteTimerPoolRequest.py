@@ -49,6 +49,8 @@ class DeleteTimerPoolRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
+        if not isinstance(timer_pool_name, unicode):
+            raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
     def with_timer_pool_name(self, timer_pool_name):

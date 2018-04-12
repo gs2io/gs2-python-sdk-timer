@@ -32,31 +32,35 @@ class CreateTimerPoolRequest(Gs2BasicRequest):
         super(CreateTimerPoolRequest, self).__init__(params)
         if params is None:
             self.__name = None
-            self.__description = None
         else:
             self.set_name(params['name'] if 'name' in params.keys() else None)
+        if params is None:
+            self.__description = None
+        else:
             self.set_description(params['description'] if 'description' in params.keys() else None)
 
     def get_name(self):
         """
-        タイマープールの名前を取得
-        :return: タイマープールの名前
+        タイマープール名を取得
+        :return: タイマープール名
         :rtype: unicode
         """
         return self.__name
 
     def set_name(self, name):
         """
-        タイマープールの名前を設定
-        :param name: タイマープールの名前
+        タイマープール名を設定
+        :param name: タイマープール名
         :type name: unicode
         """
+        if not isinstance(name, unicode):
+            raise TypeError(type(name))
         self.__name = name
 
     def with_name(self, name):
         """
-        タイマープールの名前を設定
-        :param name: タイマープールの名前
+        タイマープール名を設定
+        :param name: タイマープール名
         :type name: unicode
         :return: this
         :rtype: CreateTimerPoolRequest
@@ -66,24 +70,26 @@ class CreateTimerPoolRequest(Gs2BasicRequest):
 
     def get_description(self):
         """
-        タイマープールの説明を取得
-        :return: タイマープールの説明
+        説明文を取得
+        :return: 説明文
         :rtype: unicode
         """
         return self.__description
 
     def set_description(self, description):
         """
-        タイマープールの説明を設定
-        :param description: タイマープールの説明
+        説明文を設定
+        :param description: 説明文
         :type description: unicode
         """
+        if not isinstance(description, unicode):
+            raise TypeError(type(description))
         self.__description = description
 
     def with_description(self, description):
         """
-        タイマープールの説明を設定
-        :param description: タイマープールの説明
+        説明文を設定
+        :param description: 説明文
         :type description: unicode
         :return: this
         :rtype: CreateTimerPoolRequest

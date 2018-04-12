@@ -32,17 +32,27 @@ class CreateTimerRequest(Gs2BasicRequest):
         super(CreateTimerRequest, self).__init__(params)
         if params is None:
             self.__timer_pool_name = None
-            self.__callback_method = None
-            self.__callback_url = None
-            self.__callback_body = None
-            self.__execute_time = None
-            self.__retry_max = None
         else:
             self.set_timer_pool_name(params['timerPoolName'] if 'timerPoolName' in params.keys() else None)
+        if params is None:
+            self.__callback_method = None
+        else:
             self.set_callback_method(params['callbackMethod'] if 'callbackMethod' in params.keys() else None)
+        if params is None:
+            self.__callback_url = None
+        else:
             self.set_callback_url(params['callbackUrl'] if 'callbackUrl' in params.keys() else None)
+        if params is None:
+            self.__callback_body = None
+        else:
             self.set_callback_body(params['callbackBody'] if 'callbackBody' in params.keys() else None)
+        if params is None:
+            self.__execute_time = None
+        else:
             self.set_execute_time(params['executeTime'] if 'executeTime' in params.keys() else None)
+        if params is None:
+            self.__retry_max = None
+        else:
             self.set_retry_max(params['retryMax'] if 'retryMax' in params.keys() else None)
 
     def get_timer_pool_name(self):
@@ -59,6 +69,8 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
+        if not isinstance(timer_pool_name, unicode):
+            raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
     def with_timer_pool_name(self, timer_pool_name):
@@ -74,24 +86,26 @@ class CreateTimerRequest(Gs2BasicRequest):
 
     def get_callback_method(self):
         """
-        コールバックに利用するHTTPメソッドを取得
-        :return: コールバックに利用するHTTPメソッド
+        コールバックHTTPメソッドを取得
+        :return: コールバックHTTPメソッド
         :rtype: unicode
         """
         return self.__callback_method
 
     def set_callback_method(self, callback_method):
         """
-        コールバックに利用するHTTPメソッドを設定
-        :param callback_method: コールバックに利用するHTTPメソッド
+        コールバックHTTPメソッドを設定
+        :param callback_method: コールバックHTTPメソッド
         :type callback_method: unicode
         """
+        if not isinstance(callback_method, unicode):
+            raise TypeError(type(callback_method))
         self.__callback_method = callback_method
 
     def with_callback_method(self, callback_method):
         """
-        コールバックに利用するHTTPメソッドを設定
-        :param callback_method: コールバックに利用するHTTPメソッド
+        コールバックHTTPメソッドを設定
+        :param callback_method: コールバックHTTPメソッド
         :type callback_method: unicode
         :return: this
         :rtype: CreateTimerRequest
@@ -101,24 +115,26 @@ class CreateTimerRequest(Gs2BasicRequest):
 
     def get_callback_url(self):
         """
-        コールバック先のURLを取得
-        :return: コールバック先のURL
+        コールバックURLを取得
+        :return: コールバックURL
         :rtype: unicode
         """
         return self.__callback_url
 
     def set_callback_url(self, callback_url):
         """
-        コールバック先のURLを設定
-        :param callback_url: コールバック先のURL
+        コールバックURLを設定
+        :param callback_url: コールバックURL
         :type callback_url: unicode
         """
+        if not isinstance(callback_url, unicode):
+            raise TypeError(type(callback_url))
         self.__callback_url = callback_url
 
     def with_callback_url(self, callback_url):
         """
-        コールバック先のURLを設定
-        :param callback_url: コールバック先のURL
+        コールバックURLを設定
+        :param callback_url: コールバックURL
         :type callback_url: unicode
         :return: this
         :rtype: CreateTimerRequest
@@ -128,24 +144,26 @@ class CreateTimerRequest(Gs2BasicRequest):
 
     def get_callback_body(self):
         """
-        method に PUT/POST を指定したときに利用するリクエストボディを取得
-        :return: method に PUT/POST を指定したときに利用するリクエストボディ
+        コールバックボディ(PUT/POSTのときのみ有効)を取得
+        :return: コールバックボディ(PUT/POSTのときのみ有効)
         :rtype: unicode
         """
         return self.__callback_body
 
     def set_callback_body(self, callback_body):
         """
-        method に PUT/POST を指定したときに利用するリクエストボディを設定
-        :param callback_body: method に PUT/POST を指定したときに利用するリクエストボディ
+        コールバックボディ(PUT/POSTのときのみ有効)を設定
+        :param callback_body: コールバックボディ(PUT/POSTのときのみ有効)
         :type callback_body: unicode
         """
+        if not isinstance(callback_body, unicode):
+            raise TypeError(type(callback_body))
         self.__callback_body = callback_body
 
     def with_callback_body(self, callback_body):
         """
-        method に PUT/POST を指定したときに利用するリクエストボディを設定
-        :param callback_body: method に PUT/POST を指定したときに利用するリクエストボディ
+        コールバックボディ(PUT/POSTのときのみ有効)を設定
+        :param callback_body: コールバックボディ(PUT/POSTのときのみ有効)
         :type callback_body: unicode
         :return: this
         :rtype: CreateTimerRequest
@@ -155,24 +173,26 @@ class CreateTimerRequest(Gs2BasicRequest):
 
     def get_execute_time(self):
         """
-        コールバックを実行するタイムスタンプを取得
-        :return: コールバックを実行するタイムスタンプ
+        コールバック時間(エポック秒)を取得
+        :return: コールバック時間(エポック秒)
         :rtype: int
         """
         return self.__execute_time
 
     def set_execute_time(self, execute_time):
         """
-        コールバックを実行するタイムスタンプを設定
-        :param execute_time: コールバックを実行するタイムスタンプ
+        コールバック時間(エポック秒)を設定
+        :param execute_time: コールバック時間(エポック秒)
         :type execute_time: int
         """
+        if not isinstance(execute_time, int):
+            raise TypeError(type(execute_time))
         self.__execute_time = execute_time
 
     def with_execute_time(self, execute_time):
         """
-        コールバックを実行するタイムスタンプを設定
-        :param execute_time: コールバックを実行するタイムスタンプ
+        コールバック時間(エポック秒)を設定
+        :param execute_time: コールバック時間(エポック秒)
         :type execute_time: int
         :return: this
         :rtype: CreateTimerRequest
@@ -194,6 +214,8 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param retry_max: 最大リトライ回数
         :type retry_max: int
         """
+        if not isinstance(retry_max, int):
+            raise TypeError(type(retry_max))
         self.__retry_max = retry_max
 
     def with_retry_max(self, retry_max):

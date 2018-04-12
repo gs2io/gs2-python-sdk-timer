@@ -32,9 +32,11 @@ class GetTimerRequest(Gs2BasicRequest):
         super(GetTimerRequest, self).__init__(params)
         if params is None:
             self.__timer_pool_name = None
-            self.__timer_id = None
         else:
             self.set_timer_pool_name(params['timerPoolName'] if 'timerPoolName' in params.keys() else None)
+        if params is None:
+            self.__timer_id = None
+        else:
             self.set_timer_id(params['timerId'] if 'timerId' in params.keys() else None)
 
     def get_timer_pool_name(self):
@@ -51,6 +53,8 @@ class GetTimerRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
+        if not isinstance(timer_pool_name, unicode):
+            raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
     def with_timer_pool_name(self, timer_pool_name):
@@ -78,6 +82,8 @@ class GetTimerRequest(Gs2BasicRequest):
         :param timer_id: タイマーのIDを指定します。
         :type timer_id: unicode
         """
+        if not isinstance(timer_id, unicode):
+            raise TypeError(type(timer_id))
         self.__timer_id = timer_id
 
     def with_timer_id(self, timer_id):

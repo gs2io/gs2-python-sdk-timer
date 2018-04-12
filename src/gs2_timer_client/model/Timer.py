@@ -14,6 +14,7 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
+
 class Timer(object):
 
     def __init__(self, params=None):
@@ -37,7 +38,6 @@ class Timer(object):
             self.set_execute_time(params['executeTime'] if 'executeTime' in params.keys() else None)
             self.set_retry_max(params['retryMax'] if 'retryMax' in params.keys() else None)
             self.set_create_at(params['createAt'] if 'createAt' in params.keys() else None)
-
 
     def get_timer_id(self):
         """
@@ -184,7 +184,7 @@ class Timer(object):
         self.__create_at = create_at
 
     def to_dict(self):
-        return { 
+        return {
             "timerId": self.__timer_id,
             "ownerId": self.__owner_id,
             "timerPoolId": self.__timer_pool_id,

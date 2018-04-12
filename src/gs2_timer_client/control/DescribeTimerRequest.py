@@ -32,11 +32,15 @@ class DescribeTimerRequest(Gs2BasicRequest):
         super(DescribeTimerRequest, self).__init__(params)
         if params is None:
             self.__timer_pool_name = None
-            self.__page_token = None
-            self.__limit = None
         else:
             self.set_timer_pool_name(params['timerPoolName'] if 'timerPoolName' in params.keys() else None)
+        if params is None:
+            self.__page_token = None
+        else:
             self.set_page_token(params['pageToken'] if 'pageToken' in params.keys() else None)
+        if params is None:
+            self.__limit = None
+        else:
             self.set_limit(params['limit'] if 'limit' in params.keys() else None)
 
     def get_timer_pool_name(self):
@@ -53,6 +57,8 @@ class DescribeTimerRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
+        if not isinstance(timer_pool_name, unicode):
+            raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
     def with_timer_pool_name(self, timer_pool_name):
@@ -80,6 +86,8 @@ class DescribeTimerRequest(Gs2BasicRequest):
         :param page_token: データの取得を開始する位置を指定するトークン
         :type page_token: unicode
         """
+        if not isinstance(page_token, unicode):
+            raise TypeError(type(page_token))
         self.__page_token = page_token
 
     def with_page_token(self, page_token):
@@ -107,6 +115,8 @@ class DescribeTimerRequest(Gs2BasicRequest):
         :param limit: データの取得件数
         :type limit: int
         """
+        if not isinstance(limit, int):
+            raise TypeError(type(limit))
         self.__limit = limit
 
     def with_limit(self, limit):

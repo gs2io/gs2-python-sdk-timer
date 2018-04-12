@@ -14,8 +14,6 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-import json
-
 from gs2_core_client.Gs2Constant import Gs2Constant
 from gs2_core_client.AbstractGs2Client import AbstractGs2Client
 
@@ -34,6 +32,139 @@ class Gs2TimerClient(AbstractGs2Client):
         """
         super(Gs2TimerClient, self).__init__(credential, region)
 
+    def create_timer_pool(self, request):
+        """
+        タイマープールを新規作成します<br>
+        <br>
+        :param request: リクエストパラメータ
+        :type request: gs2_timer_client.control.CreateTimerPoolRequest.CreateTimerPoolRequest
+        :return: 結果
+        :rtype: gs2_timer_client.control.CreateTimerPoolResult.CreateTimerPoolResult
+        """
+        body = { 
+            "name": request.get_name(),
+        }
+
+        if request.get_description() is not None:
+            body["description"] = request.get_description()
+        headers = { 
+        }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
+        from gs2_timer_client.control.CreateTimerPoolRequest import CreateTimerPoolRequest
+        from gs2_timer_client.control.CreateTimerPoolResult import CreateTimerPoolResult
+        return CreateTimerPoolResult(self._do_post_request(
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool",
+            service=self.ENDPOINT,
+            component=CreateTimerPoolRequest.Constant.MODULE,
+            target_function=CreateTimerPoolRequest.Constant.FUNCTION,
+            body=body,
+            headers=headers
+        ))
+
+    def delete_timer_pool(self, request):
+        """
+        タイマープールを削除します<br>
+        <br>
+        :param request: リクエストパラメータ
+        :type request: gs2_timer_client.control.DeleteTimerPoolRequest.DeleteTimerPoolRequest
+        """
+        query_strings = {}
+        headers = { 
+        }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
+        from gs2_timer_client.control.DeleteTimerPoolRequest import DeleteTimerPoolRequest
+        self._do_delete_request(
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
+            service=self.ENDPOINT,
+            component=DeleteTimerPoolRequest.Constant.MODULE,
+            target_function=DeleteTimerPoolRequest.Constant.FUNCTION,
+            query_strings=query_strings,
+            headers=headers
+        )
+
+    def describe_timer_pool(self, request):
+        """
+        タイマープールの一覧を取得します<br>
+        <br>:param request: リクエストパラメータ
+        :type request: gs2_timer_client.control.DescribeTimerPoolRequest.DescribeTimerPoolRequest
+        :return: 結果
+        :rtype: gs2_timer_client.control.DescribeTimerPoolResult.DescribeTimerPoolResult
+        """
+        query_strings = {
+            'pageToken': request.get_page_token(),
+            'limit': request.get_limit(),
+        }
+        headers = { 
+        }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
+        from gs2_timer_client.control.DescribeTimerPoolRequest import DescribeTimerPoolRequest
+
+        from gs2_timer_client.control.DescribeTimerPoolResult import DescribeTimerPoolResult
+        return DescribeTimerPoolResult(self._do_get_request(
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool",
+            service=self.ENDPOINT,
+            component=DescribeTimerPoolRequest.Constant.MODULE,
+            target_function=DescribeTimerPoolRequest.Constant.FUNCTION,
+            query_strings=query_strings,
+            headers=headers
+        ))
+
+    def get_timer_pool(self, request):
+        """
+        タイマープールを取得します<br>
+        <br>:param request: リクエストパラメータ
+        :type request: gs2_timer_client.control.GetTimerPoolRequest.GetTimerPoolRequest
+        :return: 結果
+        :rtype: gs2_timer_client.control.GetTimerPoolResult.GetTimerPoolResult
+        """
+        query_strings = {
+        }
+        headers = { 
+        }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
+        from gs2_timer_client.control.GetTimerPoolRequest import GetTimerPoolRequest
+
+        from gs2_timer_client.control.GetTimerPoolResult import GetTimerPoolResult
+        return GetTimerPoolResult(self._do_get_request(
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
+            service=self.ENDPOINT,
+            component=GetTimerPoolRequest.Constant.MODULE,
+            target_function=GetTimerPoolRequest.Constant.FUNCTION,
+            query_strings=query_strings,
+            headers=headers
+        ))
+
+    def update_timer_pool(self, request):
+        """
+        タイマープールを更新します<br>
+        <br>
+        :param request: リクエストパラメータ
+        :type request: gs2_timer_client.control.UpdateTimerPoolRequest.UpdateTimerPoolRequest
+        :return: 結果
+        :rtype: gs2_timer_client.control.UpdateTimerPoolResult.UpdateTimerPoolResult
+        """
+        body = { 
+        }
+        if request.get_description() is not None:
+            body["description"] = request.get_description()
+        headers = { 
+        }
+        if request.get_request_id() is not None:
+            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
+        from gs2_timer_client.control.UpdateTimerPoolRequest import UpdateTimerPoolRequest
+        from gs2_timer_client.control.UpdateTimerPoolResult import UpdateTimerPoolResult
+        return UpdateTimerPoolResult(self._do_put_request(
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
+            service=self.ENDPOINT,
+            component=UpdateTimerPoolRequest.Constant.MODULE,
+            target_function=UpdateTimerPoolRequest.Constant.FUNCTION,
+            body=body,
+            headers=headers
+        ))
 
     def create_timer(self, request):
         """
@@ -69,51 +200,15 @@ class Gs2TimerClient(AbstractGs2Client):
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.CreateTimerRequest import CreateTimerRequest
-
         from gs2_timer_client.control.CreateTimerResult import CreateTimerResult
         return CreateTimerResult(self._do_post_request(
             url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer",
             service=self.ENDPOINT,
-            module=CreateTimerRequest.Constant.MODULE,
-            function=CreateTimerRequest.Constant.FUNCTION,
+            component=CreateTimerRequest.Constant.MODULE,
+            target_function=CreateTimerRequest.Constant.FUNCTION,
             body=body,
             headers=headers
         ))
-
-
-
-
-    def create_timer_pool(self, request):
-        """
-        タイマープールを新規作成します<br>
-        <br>
-        :param request: リクエストパラメータ
-        :type request: gs2_timer_client.control.CreateTimerPoolRequest.CreateTimerPoolRequest
-        :return: 結果
-        :rtype: gs2_timer_client.control.CreateTimerPoolResult.CreateTimerPoolResult
-        """
-        body = { 
-            "name": request.get_name(),
-            "description": request.get_description(),
-        }
-
-        headers = { 
-        }
-        if request.get_request_id() is not None:
-            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
-        from gs2_timer_client.control.CreateTimerPoolRequest import CreateTimerPoolRequest
-
-        from gs2_timer_client.control.CreateTimerPoolResult import CreateTimerPoolResult
-        return CreateTimerPoolResult(self._do_post_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool",
-            service=self.ENDPOINT,
-            module=CreateTimerPoolRequest.Constant.MODULE,
-            function=CreateTimerPoolRequest.Constant.FUNCTION,
-            body=body,
-            headers=headers
-        ))
-
-
 
     def delete_timer(self, request):
         """
@@ -121,74 +216,33 @@ class Gs2TimerClient(AbstractGs2Client):
         <br>
         :param request: リクエストパラメータ
         :type request: gs2_timer_client.control.DeleteTimerRequest.DeleteTimerRequest
-
         """
-
-        query_strings = {
-
-        }
+        query_strings = {}
         headers = { 
         }
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DeleteTimerRequest import DeleteTimerRequest
-
         self._do_delete_request(
             url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else request.get_timer_id())) + "",
             service=self.ENDPOINT,
-            module=DeleteTimerRequest.Constant.MODULE,
-            function=DeleteTimerRequest.Constant.FUNCTION,
+            component=DeleteTimerRequest.Constant.MODULE,
+            target_function=DeleteTimerRequest.Constant.FUNCTION,
             query_strings=query_strings,
             headers=headers
         )
-
-
-
-    def delete_timer_pool(self, request):
-        """
-        タイマープールを削除します<br>
-        <br>
-        :param request: リクエストパラメータ
-        :type request: gs2_timer_client.control.DeleteTimerPoolRequest.DeleteTimerPoolRequest
-
-        """
-
-        query_strings = {
-
-        }
-        headers = { 
-        }
-        if request.get_request_id() is not None:
-            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
-        from gs2_timer_client.control.DeleteTimerPoolRequest import DeleteTimerPoolRequest
-
-        self._do_delete_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
-            service=self.ENDPOINT,
-            module=DeleteTimerPoolRequest.Constant.MODULE,
-            function=DeleteTimerPoolRequest.Constant.FUNCTION,
-            query_strings=query_strings,
-            headers=headers
-        )
-
-
 
     def describe_timer(self, request):
         """
         タイマーの一覧を取得します<br>
-        <br>
-        :param request: リクエストパラメータ
+        <br>:param request: リクエストパラメータ
         :type request: gs2_timer_client.control.DescribeTimerRequest.DescribeTimerRequest
         :return: 結果
         :rtype: gs2_timer_client.control.DescribeTimerResult.DescribeTimerResult
         """
-
         query_strings = {
-
             'pageToken': request.get_page_token(),
-
             'limit': request.get_limit(),
-
         }
         headers = { 
         }
@@ -200,61 +254,21 @@ class Gs2TimerClient(AbstractGs2Client):
         return DescribeTimerResult(self._do_get_request(
             url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer",
             service=self.ENDPOINT,
-            module=DescribeTimerRequest.Constant.MODULE,
-            function=DescribeTimerRequest.Constant.FUNCTION,
+            component=DescribeTimerRequest.Constant.MODULE,
+            target_function=DescribeTimerRequest.Constant.FUNCTION,
             query_strings=query_strings,
             headers=headers
         ))
-
-
-
-    def describe_timer_pool(self, request):
-        """
-        タイマープールの一覧を取得します<br>
-        <br>
-        :param request: リクエストパラメータ
-        :type request: gs2_timer_client.control.DescribeTimerPoolRequest.DescribeTimerPoolRequest
-        :return: 結果
-        :rtype: gs2_timer_client.control.DescribeTimerPoolResult.DescribeTimerPoolResult
-        """
-
-        query_strings = {
-
-            'pageToken': request.get_page_token(),
-
-            'limit': request.get_limit(),
-
-        }
-        headers = { 
-        }
-        if request.get_request_id() is not None:
-            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
-        from gs2_timer_client.control.DescribeTimerPoolRequest import DescribeTimerPoolRequest
-
-        from gs2_timer_client.control.DescribeTimerPoolResult import DescribeTimerPoolResult
-        return DescribeTimerPoolResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool",
-            service=self.ENDPOINT,
-            module=DescribeTimerPoolRequest.Constant.MODULE,
-            function=DescribeTimerPoolRequest.Constant.FUNCTION,
-            query_strings=query_strings,
-            headers=headers
-        ))
-
-
 
     def get_timer(self, request):
         """
         タイマーを取得します<br>
-        <br>
-        :param request: リクエストパラメータ
+        <br>:param request: リクエストパラメータ
         :type request: gs2_timer_client.control.GetTimerRequest.GetTimerRequest
         :return: 結果
         :rtype: gs2_timer_client.control.GetTimerResult.GetTimerResult
         """
-
         query_strings = {
-
         }
         headers = { 
         }
@@ -266,72 +280,8 @@ class Gs2TimerClient(AbstractGs2Client):
         return GetTimerResult(self._do_get_request(
             url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else request.get_timer_id())) + "",
             service=self.ENDPOINT,
-            module=GetTimerRequest.Constant.MODULE,
-            function=GetTimerRequest.Constant.FUNCTION,
+            component=GetTimerRequest.Constant.MODULE,
+            target_function=GetTimerRequest.Constant.FUNCTION,
             query_strings=query_strings,
             headers=headers
         ))
-
-
-
-    def get_timer_pool(self, request):
-        """
-        タイマープールを取得します<br>
-        <br>
-        :param request: リクエストパラメータ
-        :type request: gs2_timer_client.control.GetTimerPoolRequest.GetTimerPoolRequest
-        :return: 結果
-        :rtype: gs2_timer_client.control.GetTimerPoolResult.GetTimerPoolResult
-        """
-
-        query_strings = {
-
-        }
-        headers = { 
-        }
-        if request.get_request_id() is not None:
-            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
-        from gs2_timer_client.control.GetTimerPoolRequest import GetTimerPoolRequest
-
-        from gs2_timer_client.control.GetTimerPoolResult import GetTimerPoolResult
-        return GetTimerPoolResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
-            service=self.ENDPOINT,
-            module=GetTimerPoolRequest.Constant.MODULE,
-            function=GetTimerPoolRequest.Constant.FUNCTION,
-            query_strings=query_strings,
-            headers=headers
-        ))
-
-
-
-    def update_timer_pool(self, request):
-        """
-        タイマープールを更新します<br>
-        <br>
-        :param request: リクエストパラメータ
-        :type request: gs2_timer_client.control.UpdateTimerPoolRequest.UpdateTimerPoolRequest
-        :return: 結果
-        :rtype: gs2_timer_client.control.UpdateTimerPoolResult.UpdateTimerPoolResult
-        """
-        body = { 
-            "description": request.get_description(),
-        }
-
-        headers = { 
-        }
-        if request.get_request_id() is not None:
-            headers["X-GS2-REQUEST-ID"] = request.get_request_id()
-        from gs2_timer_client.control.UpdateTimerPoolRequest import UpdateTimerPoolRequest
-
-        from gs2_timer_client.control.UpdateTimerPoolResult import UpdateTimerPoolResult
-        return UpdateTimerPoolResult(self._do_put_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
-            service=self.ENDPOINT,
-            module=UpdateTimerPoolRequest.Constant.MODULE,
-            function=UpdateTimerPoolRequest.Constant.FUNCTION,
-            body=body,
-            headers=headers
-        ))
-
-
