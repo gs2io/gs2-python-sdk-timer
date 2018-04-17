@@ -49,7 +49,7 @@ class GetTimerPoolRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
-        if timer_pool_name and not isinstance(timer_pool_name, unicode):
+        if timer_pool_name and not (isinstance(timer_pool_name, str) or isinstance(timer_pool_name, unicode)):
             raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 

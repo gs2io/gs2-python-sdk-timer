@@ -69,7 +69,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
-        if timer_pool_name and not isinstance(timer_pool_name, unicode):
+        if timer_pool_name and not (isinstance(timer_pool_name, str) or isinstance(timer_pool_name, unicode)):
             raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
@@ -98,7 +98,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param callback_method: コールバックHTTPメソッド
         :type callback_method: unicode
         """
-        if callback_method and not isinstance(callback_method, unicode):
+        if callback_method and not (isinstance(callback_method, str) or isinstance(callback_method, unicode)):
             raise TypeError(type(callback_method))
         self.__callback_method = callback_method
 
@@ -127,7 +127,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param callback_url: コールバックURL
         :type callback_url: unicode
         """
-        if callback_url and not isinstance(callback_url, unicode):
+        if callback_url and not (isinstance(callback_url, str) or isinstance(callback_url, unicode)):
             raise TypeError(type(callback_url))
         self.__callback_url = callback_url
 
@@ -156,7 +156,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param callback_body: コールバックボディ(PUT/POSTのときのみ有効)
         :type callback_body: unicode
         """
-        if callback_body and not isinstance(callback_body, unicode):
+        if callback_body and not (isinstance(callback_body, str) or isinstance(callback_body, unicode)):
             raise TypeError(type(callback_body))
         self.__callback_body = callback_body
 
