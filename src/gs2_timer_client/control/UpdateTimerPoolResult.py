@@ -26,7 +26,6 @@ class UpdateTimerPoolResult(object):
         :type response: dict
         """
         self.__item = TimerPool(response['item']) if 'item' in response.keys() and response['item'] is not None else None
-
     def get_item(self):
         """
         タイマープールを取得
@@ -34,6 +33,12 @@ class UpdateTimerPoolResult(object):
         :rtype: TimerPool
         """
         return self.__item
+
+    def __getitem__(self, key):
+        items = self.to_dict()
+        if key in items.keys():
+            return items[key]
+        return super(UpdateTimerPoolResult, self).__getitem__(key)
 
     def to_dict(self):
         """
