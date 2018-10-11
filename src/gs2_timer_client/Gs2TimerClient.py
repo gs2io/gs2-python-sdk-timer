@@ -48,8 +48,7 @@ class Gs2TimerClient(AbstractGs2Client):
 
         if request.get_description() is not None:
             body["description"] = request.get_description()
-        headers = { 
-        }
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.CreateTimerPoolRequest import CreateTimerPoolRequest
@@ -71,13 +70,12 @@ class Gs2TimerClient(AbstractGs2Client):
         :type request: gs2_timer_client.control.DeleteTimerPoolRequest.DeleteTimerPoolRequest
         """
         query_strings = {}
-        headers = { 
-        }
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DeleteTimerPoolRequest import DeleteTimerPoolRequest
         self._do_delete_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
             service=self.ENDPOINT,
             component=DeleteTimerPoolRequest.Constant.MODULE,
             target_function=DeleteTimerPoolRequest.Constant.FUNCTION,
@@ -93,12 +91,12 @@ class Gs2TimerClient(AbstractGs2Client):
         :return: 結果
         :rtype: gs2_timer_client.control.DescribeTimerPoolResult.DescribeTimerPoolResult
         """
-        query_strings = {
-            'pageToken': request.get_page_token(),
-            'limit': request.get_limit(),
-        }
-        headers = { 
-        }
+        query_strings = {}
+        if request.get_page_token() is not None:
+            query_strings['pageToken'] = request.get_page_token()
+        if request.get_limit() is not None:
+            query_strings['limit'] = request.get_limit()
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DescribeTimerPoolRequest import DescribeTimerPoolRequest
@@ -121,17 +119,15 @@ class Gs2TimerClient(AbstractGs2Client):
         :return: 結果
         :rtype: gs2_timer_client.control.GetTimerPoolResult.GetTimerPoolResult
         """
-        query_strings = {
-        }
-        headers = { 
-        }
+        query_strings = {}
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.GetTimerPoolRequest import GetTimerPoolRequest
 
         from gs2_timer_client.control.GetTimerPoolResult import GetTimerPoolResult
         return GetTimerPoolResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
             service=self.ENDPOINT,
             component=GetTimerPoolRequest.Constant.MODULE,
             target_function=GetTimerPoolRequest.Constant.FUNCTION,
@@ -152,14 +148,13 @@ class Gs2TimerClient(AbstractGs2Client):
         }
         if request.get_description() is not None:
             body["description"] = request.get_description()
-        headers = { 
-        }
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.UpdateTimerPoolRequest import UpdateTimerPoolRequest
         from gs2_timer_client.control.UpdateTimerPoolResult import UpdateTimerPoolResult
         return UpdateTimerPoolResult(self._do_put_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "",
             service=self.ENDPOINT,
             component=UpdateTimerPoolRequest.Constant.MODULE,
             target_function=UpdateTimerPoolRequest.Constant.FUNCTION,
@@ -196,14 +191,13 @@ class Gs2TimerClient(AbstractGs2Client):
             body["callbackBody"] = request.get_callback_body()
         if request.get_retry_max() is not None:
             body["retryMax"] = request.get_retry_max()
-        headers = { 
-        }
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.CreateTimerRequest import CreateTimerRequest
         from gs2_timer_client.control.CreateTimerResult import CreateTimerResult
         return CreateTimerResult(self._do_post_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "/timer",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer",
             service=self.ENDPOINT,
             component=CreateTimerRequest.Constant.MODULE,
             target_function=CreateTimerRequest.Constant.FUNCTION,
@@ -219,13 +213,12 @@ class Gs2TimerClient(AbstractGs2Client):
         :type request: gs2_timer_client.control.DeleteTimerRequest.DeleteTimerRequest
         """
         query_strings = {}
-        headers = { 
-        }
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DeleteTimerRequest import DeleteTimerRequest
         self._do_delete_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else url_encoder.encode(request.get_timer_id()))) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else request.get_timer_id())) + "",
             service=self.ENDPOINT,
             component=DeleteTimerRequest.Constant.MODULE,
             target_function=DeleteTimerRequest.Constant.FUNCTION,
@@ -241,19 +234,19 @@ class Gs2TimerClient(AbstractGs2Client):
         :return: 結果
         :rtype: gs2_timer_client.control.DescribeTimerResult.DescribeTimerResult
         """
-        query_strings = {
-            'pageToken': request.get_page_token(),
-            'limit': request.get_limit(),
-        }
-        headers = { 
-        }
+        query_strings = {}
+        if request.get_page_token() is not None:
+            query_strings['pageToken'] = request.get_page_token()
+        if request.get_limit() is not None:
+            query_strings['limit'] = request.get_limit()
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.DescribeTimerRequest import DescribeTimerRequest
 
         from gs2_timer_client.control.DescribeTimerResult import DescribeTimerResult
         return DescribeTimerResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "/timer",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer",
             service=self.ENDPOINT,
             component=DescribeTimerRequest.Constant.MODULE,
             target_function=DescribeTimerRequest.Constant.FUNCTION,
@@ -269,17 +262,15 @@ class Gs2TimerClient(AbstractGs2Client):
         :return: 結果
         :rtype: gs2_timer_client.control.GetTimerResult.GetTimerResult
         """
-        query_strings = {
-        }
-        headers = { 
-        }
+        query_strings = {}
+        headers = {}
         if request.get_request_id() is not None:
             headers["X-GS2-REQUEST-ID"] = request.get_request_id()
         from gs2_timer_client.control.GetTimerRequest import GetTimerRequest
 
         from gs2_timer_client.control.GetTimerResult import GetTimerResult
         return GetTimerResult(self._do_get_request(
-            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else url_encoder.encode(request.get_timer_pool_name()))) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else url_encoder.encode(request.get_timer_id()))) + "",
+            url=Gs2Constant.ENDPOINT_HOST + "/timerPool/" + str(("null" if request.get_timer_pool_name() is None or request.get_timer_pool_name() == "" else request.get_timer_pool_name())) + "/timer/" + str(("null" if request.get_timer_id() is None or request.get_timer_id() == "" else request.get_timer_id())) + "",
             service=self.ENDPOINT,
             component=GetTimerRequest.Constant.MODULE,
             target_function=GetTimerRequest.Constant.FUNCTION,

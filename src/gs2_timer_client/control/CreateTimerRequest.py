@@ -69,7 +69,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param timer_pool_name: タイマープールの名前を指定します。
         :type timer_pool_name: unicode
         """
-        if timer_pool_name and not (isinstance(timer_pool_name, str) or isinstance(timer_pool_name, unicode)):
+        if timer_pool_name is not None and not (isinstance(timer_pool_name, str) or isinstance(timer_pool_name, unicode)):
             raise TypeError(type(timer_pool_name))
         self.__timer_pool_name = timer_pool_name
 
@@ -98,7 +98,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param callback_method: コールバックHTTPメソッド
         :type callback_method: unicode
         """
-        if callback_method and not (isinstance(callback_method, str) or isinstance(callback_method, unicode)):
+        if callback_method is not None and not (isinstance(callback_method, str) or isinstance(callback_method, unicode)):
             raise TypeError(type(callback_method))
         self.__callback_method = callback_method
 
@@ -127,7 +127,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param callback_url: コールバックURL
         :type callback_url: unicode
         """
-        if callback_url and not (isinstance(callback_url, str) or isinstance(callback_url, unicode)):
+        if callback_url is not None and not (isinstance(callback_url, str) or isinstance(callback_url, unicode)):
             raise TypeError(type(callback_url))
         self.__callback_url = callback_url
 
@@ -156,7 +156,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param callback_body: コールバックボディ(PUT/POSTのときのみ有効)
         :type callback_body: unicode
         """
-        if callback_body and not (isinstance(callback_body, str) or isinstance(callback_body, unicode)):
+        if callback_body is not None and not (isinstance(callback_body, str) or isinstance(callback_body, unicode)):
             raise TypeError(type(callback_body))
         self.__callback_body = callback_body
 
@@ -185,7 +185,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param execute_time: コールバック時間(エポック秒)
         :type execute_time: int
         """
-        if execute_time and not isinstance(execute_time, int):
+        if execute_time is not None and not isinstance(execute_time, int):
             raise TypeError(type(execute_time))
         self.__execute_time = execute_time
 
@@ -214,7 +214,7 @@ class CreateTimerRequest(Gs2BasicRequest):
         :param retry_max: 最大リトライ回数
         :type retry_max: int
         """
-        if retry_max and not isinstance(retry_max, int):
+        if retry_max is not None and not isinstance(retry_max, int):
             raise TypeError(type(retry_max))
         self.__retry_max = retry_max
 
